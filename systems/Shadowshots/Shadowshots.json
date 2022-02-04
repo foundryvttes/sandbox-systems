@@ -1,0 +1,1776 @@
+{
+  "actors": [
+    {
+      "_id": "MtJXSbXNkj5BB6Zn",
+      "name": "Sistema shadowshots",
+      "type": "character",
+      "img": "icons/svg/mystery-man.svg",
+      "data": {
+        "tabs": [
+          {
+            "id": "HndOPnc3Uowld0F3",
+            "ikey": "principal",
+            "name": "Principal"
+          }
+        ],
+        "istemplate": true,
+        "gtemplate": "Sistema shadowshots",
+        "sheets": [],
+        "mod": 0,
+        "rollmode": "1d20",
+        "displayName": "NONE",
+        "tokenbar1": "",
+        "shieldstat": "",
+        "biovisible": true,
+        "visitabs": "2",
+        "_html": "<form class=\"{{cssClass}}\" autocomplete=\"off\" id=\"sheet\">\n    {{!-- Sheet Header --}}\n    <header class=\"sheet-header\">\n        <img class=\"profile-img\" src=\"{{actor.img}}\" title=\"{{actor.name}}\" data-edit=\"img\" height=\"100\" width=\"100\">\n        <div class=\"header-fields\">\n            <h1 class=\"charname\"><input name=\"name\" class=\"entityname\" type=\"text\" value=\"{{actor.name}}\" placeholder=\"Name\"></h1>\n            <div class=\"flexblock-left charsetup\">\n                <div class=\"col-1-2\">\n                    {{#if actor.data.istemplate}}\n                    {{else}}\n                    <div class=\"flexblock-left\">\n\n                        {{#advShow}}\n                        <a class=\"roll-mode boldtext\" title=\"Roll mode\"><i>{{data.data.rollmode}}</i></a>\n                        {{/advShow}}\n\n                        {{#showRoller}}\n                        <a class=\"roll-free\" title=\"Roll mode\"><i class=\"fas fa-dice-d20\"></i></a>\n                        {{/showRoller}}\n\n                        {{#if actor.data.selector}}\n                        <a class=\"mod-selector\" title=\"Select Options\"><i class=\"fas fa-exclamation-circle fa-2x\"></i></a>\n                        {{/if}}\n\n                        {{#rollMod}}\n                        <label class=\"label-mod\">MOD</label>\n                        <input class=\"input-mod\" type=\"text\" name=\"data.mod\" value=\"{{data.data.mod}}\">\n                        {{/rollMod}}\n\n                    </div>\n                    {{/if}}\n                </div>\n\n                <div class=\"rightblock gmsetup\">\n                    {{#if actor.data.istemplate}}\n                    {{else}}\n                    {{#isGM}}\n                    <a class=\"sheet-reload\" title=\"Reload Template\"><i class=\"fas fa-arrow-alt-circle-down fa-2x\"></i></a>\n                    <select class=\"selectsheet\" name=\"data.gtemplate\" data-type=\"String\">\n                    </select>\n                    {{/isGM}}\n                    {{/if}}\n                    {{#isGM}}\n\n\n                    <h3 class=\"rightblock-element\">Template</h3>\n                    <input class=\"check-istemplate\" name=\"data.istemplate\" id=\"check-istemplate\" type=\"checkbox\" {{checked actor.data.istemplate}}=\"\">\n\n\n                    {{/isGM}}\n\n                    {{#if actor.data.istemplate}}\n                    <h3 class=\"rightblock-element-tag\">Rebuild Sheet</h3>\n                    <a class=\"rightblock-element item-refresh\" title=\"Rebuild Sheet\"><i class=\"fas fa-sync\"></i></a>\n                    {{/if}}\n                </div>\n            </div>\n        </div>\n    </header>\n\n    {{!-- Sheet Tab Navigation --}}\n    <div class=\"atabs\">\n        <a class=\"tab-prev\" id=\"tab-prev\"><i class=\"leftarrow\"></i></a>\n        <nav class=\"sheet-tabs tabs\" data-group=\"primary\" id=\"tabs\" tabs=\"1\">\n\n            <a class=\"item tab-button player-tab desc-tab\" data-tab=\"description\" id=\"tab-0\">Bio</a>          \n            <a class=\"item tab-button player-tab\" id=\"tab-1\" data-tab=\"principal\">Principal</a><a style=\"display: none\" id=\"tab-last\"></a>\n            {{#isGM}}\n            {{#if actor.data.istemplate}}\n            <a class=\"item tab-button\" data-tab=\"token\" id=\"tab-token\">Config</a>\n            <a class=\"item tab-button\" data-tab=\"config\" id=\"tab-tabs\">Tabs</a>\n            {{/if}}\n            <a class=\"item tab-button\" data-tab=\"citems\" id=\"tab-citems\">cItems</a>\n            {{/isGM}}\n\n        </nav>\n        <a class=\"tab-next\" id=\"tab-next\"><i class=\"rightarrow\"></i></a>\n    </div>\n\n    {{!-- Sheet Body --}}\n    <section class=\"sheet-body\" id=\"sheet-body\">\n\n        {{!-- Biography Tab --}}\n        <div class=\"tab biography active scrollable\" data-group=\"primary\" data-tab=\"description\">\n            {{editor content=data.data.biography target=\"data.biography\" button=true owner=owner editable=editable}}\n        </div>\n\n        {{#if actor.data.istemplate}}\n        {{!-- SheetTabs Tab --}}\n        <div class=\"tab properties\" data-group=\"primary\" data-tab=\"config\">\n            <ol class=\"properties-list\">\n                {{#each data.data.tabs as |tab id|}}\n                <li class=\"property flexrow\" data-item-id=\"{{id}}\">\n                    <h4 class=\"property-name\">{{tab.name}}</h4>\n                    <div class=\"property-row\">\n                        <a class=\"property-controls item-top\" title=\"Top Item\"><i class=\"fas fa-arrow-alt-circle-up\"></i></a>\n                        <a class=\"property-controls item-bottom\" title=\"Bottom Item\"><i class=\"fas fa-arrow-alt-circle-down\"></i></a>\n                        <a class=\"property-control item-edit\" title=\"Edit Tab\"><i class=\"fas fa-edit\"></i></a>\n                        <a class=\"property-control item-delete\" title=\"Delete Tab\"><i class=\"fas fa-trash\"></i></a>\n                    </div>\n                </li>\n                {{/each}}\n            </ol>\n        </div>\n        {{!-- Config Tab --}}\n        <div class=\"tab token scrollable\" data-group=\"primary\" data-tab=\"token\">\n            <div class=\"flexblock\">\n                <div class=\"col-1-2\">\n                    <div class=\"new-row\">\n                        <div class=\"panelheader\">\n                            <label class=\"label-medlarge\">TOKEN OPTIONS</label>\n                        </div>\n                    </div>\n                    <div class=\"new-row\">\n                        <div class=\"flexblock-left\">\n                            <label class=\"label-medlarge\">Bar 1</label>\n                            <input class=\"token-bar1\" type=\"text\" name=\"data.tokenbar1\" value=\"{{data.data.tokenbar1}}\" tkvalue=\"\">\n                        </div>\n                    </div>\n                    <div class=\"new-row\">\n                        <div class=\"flexblock-left\">\n                            <label class=\"label-medlarge\">Shield Stat</label>\n                            <input class=\"token-shieldstat\" type=\"text\" name=\"data.shieldstat\" value=\"{{data.data.shieldstat}}\" tkvalue=\"\">\n                        </div>\n                    </div>\n                    <div class=\"new-row\">\n                        <div class=\"flexblock-left\">\n                            <label class=\"label-medlarge\">Display Name</label>\n                            <select class=\"token-displayName\" name=\"data.displayName\" data-type=\"String\" tkvalue=\"NONE\">\n                                {{#select data.data.displayName}}\n                                <option value=\"NONE\">NONE</option>\n                                <option value=\"CONTROL\">CONTROL</option>\n                                <option value=\"OWNER_HOVER\">OWNER HOVER</option>\n                                <option value=\"HOVER\">HOVER</option>\n                                <option value=\"OWNER\">OWNER</option>\n                                <option value=\"ALWAYS\">ALWAYS</option>\n                                {{/select}}\n                            </select>\n                        </div>\n                    </div>\n\n                    <div class=\"new-row\">\n                        <div class=\"panelheader\">\n                            <label class=\"label-medlarge\">TAB OPTIONS</label>\n                        </div>\n\n                        <div class=\"flexblock-left\">\n                            <label class=\"label-medlarge\">BIO Tab Visible</label>\n                            <input class=\"check-biovisible\" name=\"data.biovisible\" id=\"check-biovisible\" type=\"checkbox\" biovisible=\"true\" {{checked=\"\" actor.data.biovisible}}=\"\">\n                        </div>\n\n                        <div class=\"flexblock-left\">\n                            <label class=\"label-medlarge\">Max visible Tabs</label>\n                            <select class=\"token-visitabs\" name=\"data.visitabs\" data-type=\"String\" visitabs=\"2\">\n                                {{#select data.data.visitabs}}\n                                <option value=\"2\">2</option>\n                                <option value=\"3\">3</option>\n                                <option value=\"4\">4</option>\n                                <option value=\"5\">5</option>\n                                {{/select}}\n                            </select>\n                        </div>\n                    </div>\n\n                </div>\n                <div class=\"col-1-2\">\n                    <div class=\"new-row\">\n                        <div class=\"panelheader\">\n                            <label class=\"label-medlarge\">SHEET STYLES</label>\n                        </div>\n                    </div>\n                    <div class=\"new-row\">\n                        <div class=\"flexblock-left\">\n                            <label class=\"label-medlarge\">Background</label>\n                            <input class=\"gsheet-backg\" type=\"text\" name=\"data.backg\" value=\"{{data.data.backg}}\">\n                        </div>\n                    </div>\n                    <div class=\"new-row\">\n                        <div class=\"flexblock-left\">\n                            <label class=\"label-medlarge\">Height</label>\n                            <input class=\"gsheet-setheight\" type=\"text\" name=\"data.setheight\" value=\"{{data.data.setheight}}\">\n                        </div>\n                    </div>\n                    <div class=\"new-row\">\n                        <div class=\"flexblock-left\">\n                            <label class=\"label-medlarge\">Resizable</label>\n                            <input class=\"check-resizable\" name=\"data.resizable\" id=\"check-resizable\" type=\"checkbox\" resizable=\"false\" {{checked=\"\" actor.data.resizable}}=\"\">\n                        </div>\n                    </div>\n\n                </div>\n\n            </div>\n            <div class=\"col-1-1\">\n                <div class=\"new-row\">\n                    <div class=\"panelheader\">\n                        <label class=\"label-medlarge\">ERROR LOG (BETA)</label>\n                    </div>\n                </div>\n                <div class=\"new-row\">\n                    <textarea class=\"texteditor-large input-disabled\" name=\"data.buildlog\">{{data.data.buildlog}}\n                    </textarea>\n                </div>\n            </div>\n        </div>\n        {{/if}}\n\n        {{!-- cItems Tab --}}\n        <div class=\"tab citems scrollable\" data-group=\"primary\" data-tab=\"citems\">\n            <ol class=\"properties-list\">\n                {{#each data.data.citems as |citem cid|}}\n                <li class=\"property flexrow\" data-item-id=\"{{cid}}\">\n                    <h4 class=\"property-name\">{{citem.name}}</h4>\n                    <div class=\"property-row\">\n                        <a class=\"property-control citem-edit\" title=\"Edit cItem\"><i class=\"fas fa-edit\"></i></a>\n                        <a class=\"property-control citem-delete\" citemid=\"{{citem.id}}\" cikey=\"{{citem.ciKey}}\" title=\"Delete cItem\"><i class=\"fas fa-trash\"></i></a>\n                    </div>\n                </li>\n                {{/each}}\n            </ol>\n        </div>\n\n\n\n    <div class=\"tab scrollable principal_tab\" id=\"principal_Def\" data-group=\"primary\" data-tab=\"principal\"><div class=\"new-column sbbody\" id=\"principalBody\"><div class=\"new-block\" id=\"principalrow0\"><div class=\"col-1-3 arquetipo_panel_container\"><div class=\"panelheader\">Arquetipo</div><div class=\"table-row arquetipo_tabla_row\"><div class=\"flexblock-center arquetipo_panel_row\"><table class=\"table-free sbtable arquetipo_tabla\" name=\"data.attributes.arquetipo_tabla\" inputgroup=\"\" value=\"{{data.data.attributes.arquetipo_tabla.value}}\" attid=\"u2z61jjPJJmLLMBi\"><thead style=\"display: none;\"><tr class=\" \" tablekey=\"arquetipo_tabla\"><th class=\"input-min tableheader\">Active</th><th class=\"label-free tableheader propheader\" attkey=\"nombre_prop\">Nombre</th><th class=\" tableheader cell-empty\"></th></tr></thead><tbody class=\"table \" id=\"u2z61jjPJJmLLMBi\"></tbody></table><input name=\"data.attributes.suma.value\" value=\"{{data.data.attributes.suma.value}}\" type=\"text\" class=\"input-min input-disabled suma  inputGM\" readonly=\"true\" attid=\"bpDcHP3NtCrN4vaa\" style=\"display: none;\"></div></div></div><div class=\"col-1-3 aspectos_panel_container\"><div class=\"panelheader\">Aspectos</div><div class=\"table-row aspectos_tabla_row\"><div class=\"flexblock-center aspectos_panel_row\"><table class=\"table-free sbtable aspectos_tabla\" name=\"data.attributes.aspectos_tabla\" inputgroup=\"\" value=\"{{data.data.attributes.aspectos_tabla.value}}\" attid=\"F10YReNonPNd0Avv\"><thead style=\"display: none;\"><tr class=\" \" tablekey=\"aspectos_tabla\"><th class=\"input-min tableheader\">Active</th><th class=\"label-free tableheader propheader\" attkey=\"nombre_prop\">Nombre</th><th class=\" tableheader cell-empty\"></th></tr></thead><tbody class=\"table \" id=\"F10YReNonPNd0Avv\"></tbody></table></div></div></div><div class=\"col-1-3 ventajas_panel_container\"><div class=\"panelheader\">Ventajas</div><div class=\"table-row ventaja_tabla_row\"><div class=\"flexblock-center ventajas_panel_row\"><table class=\"table-free sbtable ventaja_tabla\" name=\"data.attributes.ventaja_tabla\" inputgroup=\"\" value=\"{{data.data.attributes.ventaja_tabla.value}}\" attid=\"n1Nx1VJxvwo07med\"><thead style=\"display: none;\"><tr class=\" \" tablekey=\"ventaja_tabla\"><th class=\"input-min tableheader\">Active</th><th class=\"label-free tableheader propheader\" attkey=\"nombre_prop\">Nombre</th><th class=\" tableheader cell-empty\"></th></tr></thead><tbody class=\"table \" id=\"n1Nx1VJxvwo07med\"></tbody></table></div></div></div></div><div class=\"new-block\" id=\"principalrow1\"><div class=\"col-1-1 roll_panel_container\"><div class=\"panelheader\">Tirada</div><div class=\"new-row roll_panel\"><div class=\"flexblock-center roll_panel_row\"><a class=\"sbbutton dificultad_boton \" attid=\"DmNw19fZM0bxy9D2\"><i class=\"dificultad_boton_button macrobutton\" macroid=\"pCGLOjSLYOkRxkBm\">Elige una dificultad y tira</i></a><h3 class=\"centertext label-free roll_label rollable\" id=\"roll\" attid=\"EjjbB1NzszMnwh63\"><div title=\"\"><i class=\"fas fa-dice-d20\"></i></div></h3></div></div></div></div></div></div></section>\n</form>",
+        "backg": "",
+        "resizable": false,
+        "setheight": "375",
+        "buildlog": "Last rebuilt: 01/26/2022,  SUCCESFULLY REBUILT",
+        "selector": false,
+        "attributes": {
+          "suma": {
+            "value": ""
+          }
+        },
+        "citems": [],
+        "rolls": {},
+        "biography": "",
+        "flags": {
+          "sandbox": {
+            "scrolls_OV6G7LczZ2f9SeGt_MtJXSbXNkj5BB6Zn": 0
+          },
+          "sbupdated": 0,
+          "ischeckingauto": false,
+          "hasupdated": true,
+          "scrolls": {},
+          "tabarray": [],
+          "rows": 0,
+          "rwidth": 0,
+          "multiwidth": 0,
+          "maxwidth": 0,
+          "maxrows": 0,
+          "multiwclass": ""
+        }
+      },
+      "token": {
+        "name": "Sistema shadowshots",
+        "img": "icons/svg/mystery-man.svg",
+        "displayName": 0,
+        "actorLink": false,
+        "width": 1,
+        "height": 1,
+        "scale": 1,
+        "mirrorX": false,
+        "mirrorY": false,
+        "lockRotation": false,
+        "rotation": 0,
+        "alpha": 1,
+        "vision": false,
+        "dimSight": 0,
+        "brightSight": 0,
+        "dimLight": 0,
+        "brightLight": 0,
+        "sightAngle": 0,
+        "lightAngle": 0,
+        "lightAlpha": 0.25,
+        "lightAnimation": {
+          "speed": 5,
+          "intensity": 5
+        },
+        "disposition": -1,
+        "displayBars": 0,
+        "bar1": {
+          "attribute": "health"
+        },
+        "bar2": {
+          "attribute": "power"
+        },
+        "flags": {},
+        "randomImg": false,
+        "light": {
+          "alpha": 0.5,
+          "angle": 0,
+          "bright": 0,
+          "coloration": 1,
+          "dim": 0,
+          "gradual": true,
+          "luminosity": 0.5,
+          "saturation": 0,
+          "contrast": 0,
+          "shadows": 0,
+          "animation": {
+            "speed": 5,
+            "intensity": 5,
+            "reverse": false
+          },
+          "darkness": {
+            "min": 0,
+            "max": 1
+          }
+        }
+      },
+      "items": [],
+      "effects": [],
+      "folder": "p8LXrDiXCI41Di6R",
+      "sort": 0,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {
+        "sandbox": {}
+      }
+    }
+  ],
+  "items": [
+    {
+      "_id": "HndOPnc3Uowld0F3",
+      "name": "Principal",
+      "type": "sheettab",
+      "img": "systems/sandbox/docs/icons/sh_tab_icon.png",
+      "data": {
+        "tabKey": "principal",
+        "title": "Principal",
+        "controlby": "public",
+        "bytypes": {
+          "public": "",
+          "gamemaster": ""
+        },
+        "condat": "",
+        "condop": "NON",
+        "condvalue": "",
+        "panels": [
+          {
+            "id": "6PyEU2er7Y3JsMkh",
+            "name": "Arquetipo panel",
+            "ikey": "arquetipo_panel"
+          },
+          {
+            "id": "HUTVeZ3fsQTsExMY",
+            "name": "Aspectos panel",
+            "ikey": "aspectos_panel"
+          },
+          {
+            "id": "rRlKaZf17qZjNDKL",
+            "name": "Ventajas panel",
+            "ikey": "ventajas_panel"
+          },
+          {
+            "id": "rvX6T9d0LfiFCadC",
+            "name": "Tirada panel",
+            "ikey": "roll_panel"
+          }
+        ]
+      },
+      "effects": [],
+      "folder": "B0ZyJsC2G31vMYmB",
+      "sort": 100000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "6PyEU2er7Y3JsMkh",
+      "name": "Arquetipo panel",
+      "type": "panel",
+      "img": "systems/sandbox/docs/icons/sh_panel_icon.png",
+      "data": {
+        "panelKey": "arquetipo_panel",
+        "title": "Arquetipo",
+        "isLocked": false,
+        "width": "1/3",
+        "wtypes": {
+          "full": {
+            "value": "1"
+          },
+          "five-sixths": {
+            "value": "5/6"
+          },
+          "three-fourths": {
+            "value": "3/4"
+          },
+          "two-thirds": {
+            "value": "2/3"
+          },
+          "five-eigths": {
+            "value": "5/8"
+          },
+          "half": {
+            "value": "1/2"
+          },
+          "three-eigths": {
+            "value": "3/8"
+          },
+          "third": {
+            "value": "1/3"
+          },
+          "thirth": {
+            "value": "3/10"
+          },
+          "fourth": {
+            "value": "1/4"
+          },
+          "sixth": {
+            "value": "1/6"
+          },
+          "eigth": {
+            "value": "1/8"
+          },
+          "sixteenth": {
+            "value": "1/16"
+          }
+        },
+        "columns": "2",
+        "ctypes": {
+          "c1": {
+            "value": 1
+          },
+          "c2": {
+            "value": 2
+          },
+          "c3": {
+            "value": 3
+          },
+          "c4": {
+            "value": 4
+          },
+          "c5": {
+            "value": 5
+          },
+          "c6": {
+            "value": 6
+          },
+          "c7": {
+            "value": 7
+          },
+          "c8": {
+            "value": 8
+          }
+        },
+        "alignment": "center",
+        "contentalign": "center",
+        "atypes": {
+          "left": "",
+          "center": "",
+          "right": ""
+        },
+        "condat": "",
+        "condop": "NON",
+        "condvalue": "",
+        "backg": "D",
+        "isimg": false,
+        "imgsrc": "",
+        "fontgroup": "",
+        "inputgroup": "",
+        "headergroup": "",
+        "properties": [
+          {
+            "id": "u2z61jjPJJmLLMBi",
+            "name": "Arquetipo tabla",
+            "ikey": "arquetipo_tabla"
+          },
+          {
+            "id": "bpDcHP3NtCrN4vaa",
+            "name": "Suma",
+            "ikey": "suma"
+          }
+        ]
+      },
+      "effects": [],
+      "folder": "0j9YXVgEkaBhSeOg",
+      "sort": 100000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "HUTVeZ3fsQTsExMY",
+      "name": "Aspectos panel",
+      "type": "panel",
+      "img": "systems/sandbox/docs/icons/sh_panel_icon.png",
+      "data": {
+        "panelKey": "aspectos_panel",
+        "title": "Aspectos",
+        "isLocked": false,
+        "width": "1/3",
+        "wtypes": {
+          "full": {
+            "value": "1"
+          },
+          "five-sixths": {
+            "value": "5/6"
+          },
+          "three-fourths": {
+            "value": "3/4"
+          },
+          "two-thirds": {
+            "value": "2/3"
+          },
+          "five-eigths": {
+            "value": "5/8"
+          },
+          "half": {
+            "value": "1/2"
+          },
+          "three-eigths": {
+            "value": "3/8"
+          },
+          "third": {
+            "value": "1/3"
+          },
+          "thirth": {
+            "value": "3/10"
+          },
+          "fourth": {
+            "value": "1/4"
+          },
+          "sixth": {
+            "value": "1/6"
+          },
+          "eigth": {
+            "value": "1/8"
+          },
+          "sixteenth": {
+            "value": "1/16"
+          }
+        },
+        "columns": "1",
+        "ctypes": {
+          "c1": {
+            "value": 1
+          },
+          "c2": {
+            "value": 2
+          },
+          "c3": {
+            "value": 3
+          },
+          "c4": {
+            "value": 4
+          },
+          "c5": {
+            "value": 5
+          },
+          "c6": {
+            "value": 6
+          },
+          "c7": {
+            "value": 7
+          },
+          "c8": {
+            "value": 8
+          }
+        },
+        "alignment": "center",
+        "contentalign": "center",
+        "atypes": {
+          "left": "",
+          "center": "",
+          "right": ""
+        },
+        "condat": "",
+        "condop": "NON",
+        "condvalue": "",
+        "backg": "D",
+        "isimg": false,
+        "imgsrc": "",
+        "fontgroup": "",
+        "inputgroup": "",
+        "headergroup": "",
+        "properties": [
+          {
+            "id": "F10YReNonPNd0Avv",
+            "name": "Aspectos tabla",
+            "ikey": "aspectos_tabla"
+          }
+        ],
+        "attributes": {
+          "name": "Aspectos panel"
+        }
+      },
+      "effects": [],
+      "folder": "0j9YXVgEkaBhSeOg",
+      "sort": 200000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "rvX6T9d0LfiFCadC",
+      "name": "Tirada panel",
+      "type": "panel",
+      "img": "systems/sandbox/docs/icons/sh_panel_icon.png",
+      "data": {
+        "panelKey": "roll_panel",
+        "title": "Tirada",
+        "isLocked": false,
+        "width": "1",
+        "wtypes": {
+          "full": {
+            "value": "1"
+          },
+          "five-sixths": {
+            "value": "5/6"
+          },
+          "three-fourths": {
+            "value": "3/4"
+          },
+          "two-thirds": {
+            "value": "2/3"
+          },
+          "five-eigths": {
+            "value": "5/8"
+          },
+          "half": {
+            "value": "1/2"
+          },
+          "three-eigths": {
+            "value": "3/8"
+          },
+          "third": {
+            "value": "1/3"
+          },
+          "thirth": {
+            "value": "3/10"
+          },
+          "fourth": {
+            "value": "1/4"
+          },
+          "sixth": {
+            "value": "1/6"
+          },
+          "eigth": {
+            "value": "1/8"
+          },
+          "sixteenth": {
+            "value": "1/16"
+          }
+        },
+        "columns": "2",
+        "ctypes": {
+          "c1": {
+            "value": 1
+          },
+          "c2": {
+            "value": 2
+          },
+          "c3": {
+            "value": 3
+          },
+          "c4": {
+            "value": 4
+          },
+          "c5": {
+            "value": 5
+          },
+          "c6": {
+            "value": 6
+          },
+          "c7": {
+            "value": 7
+          },
+          "c8": {
+            "value": 8
+          }
+        },
+        "alignment": "center",
+        "contentalign": "center",
+        "atypes": {
+          "left": "",
+          "center": "",
+          "right": ""
+        },
+        "condat": "",
+        "condop": "NON",
+        "condvalue": "",
+        "backg": "D",
+        "isimg": false,
+        "imgsrc": "",
+        "fontgroup": "",
+        "inputgroup": "",
+        "headergroup": "",
+        "properties": [
+          {
+            "id": "DmNw19fZM0bxy9D2",
+            "name": "Dificultad boton",
+            "ikey": "dificultad_boton"
+          },
+          {
+            "id": "EjjbB1NzszMnwh63",
+            "name": "Tirada",
+            "ikey": "roll"
+          }
+        ]
+      },
+      "effects": [],
+      "folder": "0j9YXVgEkaBhSeOg",
+      "sort": 300000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "rRlKaZf17qZjNDKL",
+      "name": "Ventajas panel",
+      "type": "panel",
+      "img": "systems/sandbox/docs/icons/sh_panel_icon.png",
+      "data": {
+        "panelKey": "ventajas_panel",
+        "title": "Ventajas",
+        "isLocked": false,
+        "width": "1/3",
+        "wtypes": {
+          "full": {
+            "value": "1"
+          },
+          "five-sixths": {
+            "value": "5/6"
+          },
+          "three-fourths": {
+            "value": "3/4"
+          },
+          "two-thirds": {
+            "value": "2/3"
+          },
+          "five-eigths": {
+            "value": "5/8"
+          },
+          "half": {
+            "value": "1/2"
+          },
+          "three-eigths": {
+            "value": "3/8"
+          },
+          "third": {
+            "value": "1/3"
+          },
+          "thirth": {
+            "value": "3/10"
+          },
+          "fourth": {
+            "value": "1/4"
+          },
+          "sixth": {
+            "value": "1/6"
+          },
+          "eigth": {
+            "value": "1/8"
+          },
+          "sixteenth": {
+            "value": "1/16"
+          }
+        },
+        "columns": "1",
+        "ctypes": {
+          "c1": {
+            "value": 1
+          },
+          "c2": {
+            "value": 2
+          },
+          "c3": {
+            "value": 3
+          },
+          "c4": {
+            "value": 4
+          },
+          "c5": {
+            "value": 5
+          },
+          "c6": {
+            "value": 6
+          },
+          "c7": {
+            "value": 7
+          },
+          "c8": {
+            "value": 8
+          }
+        },
+        "alignment": "center",
+        "contentalign": "center",
+        "atypes": {
+          "left": "",
+          "center": "",
+          "right": ""
+        },
+        "condat": "",
+        "condop": "NON",
+        "condvalue": "",
+        "backg": "D",
+        "isimg": false,
+        "imgsrc": "",
+        "fontgroup": "",
+        "inputgroup": "",
+        "headergroup": "",
+        "properties": [
+          {
+            "id": "n1Nx1VJxvwo07med",
+            "name": "Ventaja tabla",
+            "ikey": "ventaja_tabla"
+          }
+        ]
+      },
+      "effects": [],
+      "folder": "0j9YXVgEkaBhSeOg",
+      "sort": 400000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "j79iBXkoMbptnoth",
+      "name": "Arquetipo",
+      "type": "property",
+      "img": "systems/sandbox/docs/icons/sh_prop_icon.png",
+      "data": {
+        "attKey": "arquetipo_prop",
+        "datatype": "simpletext",
+        "dtypes": {
+          "simpletext": "",
+          "simplenumeric": "",
+          "checkbox": "",
+          "radio": "",
+          "textarea": "",
+          "list": "",
+          "label": "",
+          "badge": "",
+          "table": "",
+          "button": ""
+        },
+        "defvalue": "",
+        "auto": "",
+        "automax": "",
+        "maxvisible": true,
+        "maxtop": true,
+        "listoptions": "",
+        "checkgroup": "",
+        "customcheck": false,
+        "onPath": "",
+        "offPath": "",
+        "editable": true,
+        "haslabel": false,
+        "tooltip": "",
+        "labelformat": "N",
+        "fontgroup": "",
+        "inputgroup": "",
+        "labelsize": "F",
+        "inputsize": "F",
+        "hasroll": false,
+        "ishidden": false,
+        "hasheader": true,
+        "namecolumn": "Item",
+        "hasunits": true,
+        "hasuses": true,
+        "hasactivation": false,
+        "hastotals": false,
+        "transferrable": false,
+        "onlynames": "",
+        "isfreetable": false,
+        "tableitems": [],
+        "tableheight": "F",
+        "rollname": "",
+        "rollexp": "",
+        "rollid": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "radiotype": "",
+        "group": {},
+        "totalize": false,
+        "arrows": false,
+        "tag": "",
+        "macroid": ""
+      },
+      "effects": [],
+      "folder": "RvnEK9QUpOROlv2l",
+      "sort": 100000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "cSu23sgcJkjNVTWe",
+      "name": "Arquetipo check",
+      "type": "property",
+      "img": "systems/sandbox/docs/icons/sh_prop_icon.png",
+      "data": {
+        "attKey": "arquetipo_check",
+        "datatype": "checkbox",
+        "dtypes": {
+          "simpletext": "",
+          "simplenumeric": "",
+          "checkbox": "",
+          "radio": "",
+          "textarea": "",
+          "list": "",
+          "label": "",
+          "badge": "",
+          "table": "",
+          "button": ""
+        },
+        "defvalue": "false",
+        "auto": "",
+        "automax": "",
+        "maxvisible": true,
+        "maxtop": true,
+        "listoptions": "",
+        "checkgroup": "",
+        "customcheck": false,
+        "onPath": "",
+        "offPath": "",
+        "editable": true,
+        "haslabel": false,
+        "tooltip": "",
+        "labelformat": "N",
+        "fontgroup": "",
+        "inputgroup": "",
+        "labelsize": "F",
+        "inputsize": "F",
+        "hasroll": false,
+        "ishidden": false,
+        "hasheader": true,
+        "namecolumn": "Item",
+        "hasunits": true,
+        "hasuses": true,
+        "hasactivation": false,
+        "hastotals": false,
+        "transferrable": false,
+        "onlynames": "",
+        "isfreetable": false,
+        "tableitems": [],
+        "tableheight": "F",
+        "rollname": "",
+        "rollexp": "",
+        "rollid": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "radiotype": "",
+        "group": {},
+        "totalize": false,
+        "arrows": false,
+        "tag": "",
+        "macroid": "",
+        "attributes": {
+          "name": "Arquetipo check"
+        }
+      },
+      "effects": [],
+      "folder": "RvnEK9QUpOROlv2l",
+      "sort": 200000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "DmNw19fZM0bxy9D2",
+      "name": "Dificultad boton",
+      "type": "property",
+      "img": "systems/sandbox/docs/icons/sh_prop_icon.png",
+      "data": {
+        "attKey": "dificultad_boton",
+        "datatype": "button",
+        "dtypes": {
+          "simpletext": "",
+          "simplenumeric": "",
+          "checkbox": "",
+          "radio": "",
+          "textarea": "",
+          "list": "",
+          "label": "",
+          "badge": "",
+          "table": "",
+          "button": ""
+        },
+        "defvalue": "",
+        "auto": "",
+        "automax": "",
+        "maxvisible": true,
+        "maxtop": true,
+        "listoptions": "",
+        "checkgroup": "",
+        "customcheck": false,
+        "onPath": "",
+        "offPath": "",
+        "editable": true,
+        "haslabel": true,
+        "tooltip": "",
+        "labelformat": "N",
+        "fontgroup": "",
+        "inputgroup": "",
+        "labelsize": "F",
+        "inputsize": "F",
+        "hasroll": false,
+        "ishidden": false,
+        "hasheader": true,
+        "namecolumn": "Item",
+        "hasunits": true,
+        "hasuses": true,
+        "hasactivation": false,
+        "hastotals": false,
+        "transferrable": false,
+        "onlynames": "",
+        "isfreetable": false,
+        "tableitems": [],
+        "tableheight": "F",
+        "rollname": "",
+        "rollexp": "",
+        "rollid": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "radiotype": "",
+        "group": {},
+        "totalize": false,
+        "arrows": false,
+        "tag": "Elige una dificultad y tira",
+        "macroid": "pCGLOjSLYOkRxkBm",
+        "attributes": {
+          "name": "Dificultad boton"
+        }
+      },
+      "effects": [],
+      "folder": "RvnEK9QUpOROlv2l",
+      "sort": 300000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "K1lXSHGJCFKsw4z1",
+      "name": "nombres para grupos",
+      "type": "property",
+      "img": "systems/sandbox/docs/icons/sh_prop_icon.png",
+      "data": {
+        "attKey": "nombre_prop",
+        "datatype": "simpletext",
+        "dtypes": {
+          "simpletext": "",
+          "simplenumeric": "",
+          "checkbox": "",
+          "radio": "",
+          "textarea": "",
+          "list": "",
+          "label": "",
+          "badge": "",
+          "table": "",
+          "button": ""
+        },
+        "defvalue": "",
+        "auto": "",
+        "automax": "",
+        "maxvisible": true,
+        "maxtop": true,
+        "listoptions": "",
+        "checkgroup": "",
+        "customcheck": false,
+        "onPath": "",
+        "offPath": "",
+        "editable": true,
+        "haslabel": true,
+        "tooltip": "",
+        "labelformat": "N",
+        "fontgroup": "",
+        "inputgroup": "",
+        "labelsize": "F",
+        "inputsize": "F",
+        "hasroll": false,
+        "ishidden": false,
+        "hasheader": true,
+        "namecolumn": "Item",
+        "hasunits": true,
+        "hasuses": true,
+        "hasactivation": false,
+        "hastotals": false,
+        "transferrable": false,
+        "onlynames": "",
+        "isfreetable": false,
+        "tableitems": [],
+        "tableheight": "F",
+        "rollname": "",
+        "rollexp": "",
+        "rollid": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "radiotype": "",
+        "group": {},
+        "totalize": false,
+        "arrows": false,
+        "tag": "Nombre",
+        "macroid": ""
+      },
+      "effects": [],
+      "folder": "RvnEK9QUpOROlv2l",
+      "sort": 400000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "bpDcHP3NtCrN4vaa",
+      "name": "Suma",
+      "type": "property",
+      "img": "systems/sandbox/docs/icons/sh_prop_icon.png",
+      "data": {
+        "attKey": "suma",
+        "datatype": "simplenumeric",
+        "dtypes": {
+          "simpletext": "",
+          "simplenumeric": "",
+          "checkbox": "",
+          "radio": "",
+          "textarea": "",
+          "list": "",
+          "label": "",
+          "badge": "",
+          "table": "",
+          "button": ""
+        },
+        "defvalue": "",
+        "auto": "0",
+        "automax": "3",
+        "maxvisible": false,
+        "maxtop": true,
+        "listoptions": "",
+        "checkgroup": "",
+        "customcheck": false,
+        "onPath": "",
+        "offPath": "",
+        "editable": false,
+        "haslabel": false,
+        "tooltip": "",
+        "labelformat": "N",
+        "fontgroup": "",
+        "inputgroup": "",
+        "labelsize": "F",
+        "inputsize": "F",
+        "hasroll": false,
+        "ishidden": true,
+        "hasheader": true,
+        "namecolumn": "Item",
+        "hasunits": true,
+        "hasuses": true,
+        "hasactivation": false,
+        "hastotals": false,
+        "transferrable": false,
+        "onlynames": "",
+        "isfreetable": false,
+        "tableitems": [],
+        "tableheight": "F",
+        "rollname": "",
+        "rollexp": "",
+        "rollid": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "radiotype": "",
+        "group": {},
+        "totalize": false,
+        "arrows": false,
+        "tag": "",
+        "macroid": ""
+      },
+      "effects": [],
+      "folder": "RvnEK9QUpOROlv2l",
+      "sort": 500000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "EjjbB1NzszMnwh63",
+      "name": "Tirada",
+      "type": "property",
+      "img": "systems/sandbox/docs/icons/sh_prop_icon.png",
+      "data": {
+        "attKey": "roll",
+        "datatype": "label",
+        "dtypes": {
+          "simpletext": "",
+          "simplenumeric": "",
+          "checkbox": "",
+          "radio": "",
+          "textarea": "",
+          "list": "",
+          "label": "",
+          "badge": "",
+          "table": "",
+          "button": ""
+        },
+        "defvalue": "",
+        "auto": "",
+        "automax": "",
+        "maxvisible": true,
+        "maxtop": true,
+        "listoptions": "",
+        "checkgroup": "",
+        "customcheck": false,
+        "onPath": "",
+        "offPath": "",
+        "editable": true,
+        "haslabel": true,
+        "tooltip": "",
+        "labelformat": "D",
+        "fontgroup": "",
+        "inputgroup": "",
+        "labelsize": "F",
+        "inputsize": "F",
+        "hasroll": true,
+        "ishidden": false,
+        "hasheader": true,
+        "namecolumn": "Item",
+        "hasunits": true,
+        "hasuses": true,
+        "hasactivation": false,
+        "hastotals": false,
+        "transferrable": false,
+        "onlynames": "",
+        "isfreetable": false,
+        "tableitems": [],
+        "tableheight": "F",
+        "rollname": "Tirada",
+        "rollexp": "(@{suma}+2)d10kh2 &&total;0:Fracaso,#{diff}:Éxito&&",
+        "rollid": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "radiotype": "",
+        "group": {},
+        "totalize": false,
+        "arrows": false,
+        "tag": "",
+        "macroid": ""
+      },
+      "effects": [],
+      "folder": "RvnEK9QUpOROlv2l",
+      "sort": 600000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "PwTRZIBAXN9t8j3f",
+      "name": "Arquetipo grupo",
+      "type": "group",
+      "img": "systems/sandbox/docs/icons/sh_group_icon.png",
+      "data": {
+        "groupKey": "arquetipo_grupo",
+        "isUnique": true,
+        "properties": [
+          {
+            "id": "K1lXSHGJCFKsw4z1",
+            "name": "nombres para grupos",
+            "ikey": "nombre_prop",
+            "isconstant": false
+          }
+        ],
+        "attributes": {
+          "name": "Arquetipo grupo"
+        }
+      },
+      "effects": [],
+      "folder": "kOhOl67CJtg7cSrl",
+      "sort": 100000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "u2z61jjPJJmLLMBi",
+      "name": "Arquetipo tabla",
+      "type": "property",
+      "img": "systems/sandbox/docs/icons/sh_prop_icon.png",
+      "data": {
+        "attKey": "arquetipo_tabla",
+        "datatype": "table",
+        "dtypes": {
+          "simpletext": "",
+          "simplenumeric": "",
+          "checkbox": "",
+          "radio": "",
+          "textarea": "",
+          "list": "",
+          "label": "",
+          "badge": "",
+          "table": "",
+          "button": ""
+        },
+        "defvalue": "",
+        "auto": "",
+        "automax": "",
+        "maxvisible": true,
+        "maxtop": true,
+        "listoptions": "",
+        "checkgroup": "",
+        "customcheck": false,
+        "onPath": "",
+        "offPath": "",
+        "editable": true,
+        "haslabel": true,
+        "tooltip": "",
+        "labelformat": "N",
+        "fontgroup": "",
+        "inputgroup": "",
+        "labelsize": "F",
+        "inputsize": "F",
+        "hasroll": false,
+        "ishidden": false,
+        "hasheader": false,
+        "namecolumn": "Aspectos",
+        "hasunits": false,
+        "hasuses": false,
+        "hasactivation": true,
+        "hastotals": false,
+        "transferrable": false,
+        "onlynames": "NO_NAMES",
+        "isfreetable": false,
+        "tableitems": [],
+        "tableheight": "F",
+        "rollname": "",
+        "rollexp": "",
+        "rollid": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "radiotype": "",
+        "group": {
+          "name": "Arquetipo grupo",
+          "id": "PwTRZIBAXN9t8j3f",
+          "ikey": "arquetipo_grupo"
+        },
+        "totalize": false,
+        "arrows": false,
+        "tag": "",
+        "macroid": "",
+        "attributes": {
+          "name": "Arquetipo tabla"
+        }
+      },
+      "effects": [],
+      "folder": "kOhOl67CJtg7cSrl",
+      "sort": 200000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "vcyROtCSduRfdRuV",
+      "name": "Aspectos grupo",
+      "type": "group",
+      "img": "systems/sandbox/docs/icons/sh_group_icon.png",
+      "data": {
+        "groupKey": "aspectos_grupo",
+        "isUnique": false,
+        "properties": [
+          {
+            "id": "K1lXSHGJCFKsw4z1",
+            "name": "nombres para grupos",
+            "ikey": "nombre_prop",
+            "isconstant": false
+          }
+        ]
+      },
+      "effects": [],
+      "folder": "kOhOl67CJtg7cSrl",
+      "sort": 300000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "F10YReNonPNd0Avv",
+      "name": "Aspectos tabla",
+      "type": "property",
+      "img": "systems/sandbox/docs/icons/sh_prop_icon.png",
+      "data": {
+        "attKey": "aspectos_tabla",
+        "datatype": "table",
+        "dtypes": {
+          "simpletext": "",
+          "simplenumeric": "",
+          "checkbox": "",
+          "radio": "",
+          "textarea": "",
+          "list": "",
+          "label": "",
+          "badge": "",
+          "table": "",
+          "button": ""
+        },
+        "defvalue": "",
+        "auto": "",
+        "automax": "",
+        "maxvisible": true,
+        "maxtop": true,
+        "listoptions": "",
+        "checkgroup": "",
+        "customcheck": false,
+        "onPath": "",
+        "offPath": "",
+        "editable": true,
+        "haslabel": true,
+        "tooltip": "",
+        "labelformat": "N",
+        "fontgroup": "",
+        "inputgroup": "",
+        "labelsize": "F",
+        "inputsize": "F",
+        "hasroll": false,
+        "ishidden": false,
+        "hasheader": false,
+        "namecolumn": "Aspectos",
+        "hasunits": false,
+        "hasuses": false,
+        "hasactivation": true,
+        "hastotals": false,
+        "transferrable": false,
+        "onlynames": "NO_NAMES",
+        "isfreetable": false,
+        "tableitems": [],
+        "tableheight": "F",
+        "rollname": "",
+        "rollexp": "",
+        "rollid": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "radiotype": "",
+        "group": {
+          "name": "Aspectos grupo",
+          "id": "vcyROtCSduRfdRuV",
+          "ikey": "aspectos_grupo"
+        },
+        "totalize": false,
+        "arrows": false,
+        "tag": "",
+        "macroid": ""
+      },
+      "effects": [],
+      "folder": "kOhOl67CJtg7cSrl",
+      "sort": 400000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "NBIGol5sUhFwuVvP",
+      "name": "Ventaja grupo",
+      "type": "group",
+      "img": "systems/sandbox/docs/icons/sh_group_icon.png",
+      "data": {
+        "groupKey": "ventaja_grupo",
+        "isUnique": false,
+        "properties": [
+          {
+            "id": "K1lXSHGJCFKsw4z1",
+            "name": "nombres para grupos",
+            "ikey": "nombre_prop",
+            "isconstant": false
+          }
+        ]
+      },
+      "effects": [],
+      "folder": "kOhOl67CJtg7cSrl",
+      "sort": 500000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "n1Nx1VJxvwo07med",
+      "name": "Ventaja tabla",
+      "type": "property",
+      "img": "systems/sandbox/docs/icons/sh_prop_icon.png",
+      "data": {
+        "attKey": "ventaja_tabla",
+        "datatype": "table",
+        "dtypes": {
+          "simpletext": "",
+          "simplenumeric": "",
+          "checkbox": "",
+          "radio": "",
+          "textarea": "",
+          "list": "",
+          "label": "",
+          "badge": "",
+          "table": "",
+          "button": ""
+        },
+        "defvalue": "",
+        "auto": "",
+        "automax": "",
+        "maxvisible": true,
+        "maxtop": true,
+        "listoptions": "",
+        "checkgroup": "",
+        "customcheck": false,
+        "onPath": "",
+        "offPath": "",
+        "editable": true,
+        "haslabel": true,
+        "tooltip": "",
+        "labelformat": "N",
+        "fontgroup": "",
+        "inputgroup": "",
+        "labelsize": "F",
+        "inputsize": "F",
+        "hasroll": false,
+        "ishidden": false,
+        "hasheader": false,
+        "namecolumn": "Item",
+        "hasunits": false,
+        "hasuses": false,
+        "hasactivation": true,
+        "hastotals": false,
+        "transferrable": false,
+        "onlynames": "NO_NAMES",
+        "isfreetable": false,
+        "tableitems": [],
+        "tableheight": "F",
+        "rollname": "",
+        "rollexp": "",
+        "rollid": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "radiotype": "",
+        "group": {
+          "id": "NBIGol5sUhFwuVvP",
+          "name": "Ventaja grupo",
+          "ikey": "ventaja_grupo"
+        },
+        "totalize": false,
+        "arrows": false,
+        "tag": "",
+        "macroid": ""
+      },
+      "effects": [],
+      "folder": "kOhOl67CJtg7cSrl",
+      "sort": 600000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "bPRsj52gEr3sShT2",
+      "name": "Arquetipo",
+      "type": "cItem",
+      "img": "systems/sandbox/docs/icons/sh_citem_icon.png",
+      "data": {
+        "ciKey": "bPRsj52gEr3sShT2",
+        "isUnique": true,
+        "uniqueGID": "",
+        "usetype": "ACT",
+        "selfdestruct": false,
+        "effectpath": "",
+        "ispermanent": false,
+        "maxuses": 1,
+        "icon": "BOOK",
+        "rechargable": false,
+        "roll": "",
+        "rollid": "",
+        "rollname": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "tokeniconpath": "",
+        "istokenicon": false,
+        "tokenvisible": false,
+        "mods": [
+          {
+            "name": "Aspecto",
+            "index": 0,
+            "type": "ADD",
+            "attribute": "suma",
+            "selectnum": "",
+            "listmod": "INCLUDE",
+            "items": [],
+            "value": "1"
+          }
+        ],
+        "groups": [
+          {
+            "id": "PwTRZIBAXN9t8j3f",
+            "name": "Arquetipo grupo",
+            "ikey": "arquetipo_grupo"
+          }
+        ],
+        "attributes": {
+          "name": "Arquetipo",
+          "nombre_prop": {
+            "value": ""
+          }
+        },
+        "description": "<p>Espadachin</p>\n<p>&nbsp;</p>"
+      },
+      "effects": [],
+      "folder": "O1OQnKmoAdy4UCRP",
+      "sort": 100000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "K3hLWUn4XX2CF1MJ",
+      "name": "Aspecto 1",
+      "type": "cItem",
+      "img": "systems/sandbox/docs/icons/sh_citem_icon.png",
+      "data": {
+        "ciKey": "K3hLWUn4XX2CF1MJ",
+        "isUnique": false,
+        "uniqueGID": "",
+        "usetype": "ACT",
+        "selfdestruct": false,
+        "effectpath": "",
+        "ispermanent": false,
+        "maxuses": 1,
+        "icon": "BOOK",
+        "rechargable": false,
+        "roll": "",
+        "rollid": "",
+        "rollname": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "tokeniconpath": "",
+        "istokenicon": false,
+        "tokenvisible": false,
+        "mods": [
+          {
+            "name": "Aspecto",
+            "index": 0,
+            "type": "ADD",
+            "attribute": "suma",
+            "selectnum": "",
+            "listmod": "INCLUDE",
+            "items": [],
+            "value": "1"
+          }
+        ],
+        "groups": [
+          {
+            "id": "vcyROtCSduRfdRuV",
+            "name": "Aspectos grupo",
+            "ikey": "aspectos_grupo"
+          }
+        ],
+        "attributes": {
+          "nombre_prop": {
+            "value": ""
+          }
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": "O1OQnKmoAdy4UCRP",
+      "sort": 200000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "w1TcLZ37p5mhjQQV",
+      "name": "Aspecto 2",
+      "type": "cItem",
+      "img": "systems/sandbox/docs/icons/sh_citem_icon.png",
+      "data": {
+        "ciKey": "w1TcLZ37p5mhjQQV",
+        "isUnique": false,
+        "uniqueGID": "",
+        "usetype": "ACT",
+        "selfdestruct": false,
+        "effectpath": "",
+        "ispermanent": false,
+        "maxuses": 1,
+        "icon": "BOOK",
+        "rechargable": false,
+        "roll": "",
+        "rollid": "",
+        "rollname": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "tokeniconpath": "",
+        "istokenicon": false,
+        "tokenvisible": false,
+        "mods": [
+          {
+            "name": "Aspecto",
+            "index": 0,
+            "type": "ADD",
+            "attribute": "suma",
+            "selectnum": "",
+            "listmod": "INCLUDE",
+            "items": [],
+            "value": "1"
+          }
+        ],
+        "groups": [
+          {
+            "id": "vcyROtCSduRfdRuV",
+            "name": "Aspectos grupo",
+            "ikey": "aspectos_grupo"
+          }
+        ],
+        "attributes": {
+          "name": "Aspecto 2",
+          "nombre_prop": {
+            "value": ""
+          }
+        },
+        "description": "",
+        "data": {
+          "ciKey": "w1TcLZ37p5mhjQQV"
+        }
+      },
+      "effects": [],
+      "folder": "O1OQnKmoAdy4UCRP",
+      "sort": 300000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "jcIjND3oWWOUVpy4",
+      "name": "Aspecto 3",
+      "type": "cItem",
+      "img": "systems/sandbox/docs/icons/sh_citem_icon.png",
+      "data": {
+        "ciKey": "jcIjND3oWWOUVpy4",
+        "isUnique": false,
+        "uniqueGID": "",
+        "usetype": "ACT",
+        "selfdestruct": false,
+        "effectpath": "",
+        "ispermanent": false,
+        "maxuses": 1,
+        "icon": "BOOK",
+        "rechargable": false,
+        "roll": "",
+        "rollid": "",
+        "rollname": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "tokeniconpath": "",
+        "istokenicon": false,
+        "tokenvisible": false,
+        "mods": [
+          {
+            "name": "Aspecto",
+            "index": 0,
+            "type": "ADD",
+            "attribute": "suma",
+            "selectnum": "",
+            "listmod": "INCLUDE",
+            "items": [],
+            "value": "1"
+          }
+        ],
+        "groups": [
+          {
+            "id": "vcyROtCSduRfdRuV",
+            "name": "Aspectos grupo",
+            "ikey": "aspectos_grupo"
+          }
+        ],
+        "attributes": {
+          "name": "Aspecto 3",
+          "nombre_prop": {
+            "value": ""
+          }
+        },
+        "description": "",
+        "data": {
+          "ciKey": "jcIjND3oWWOUVpy4"
+        }
+      },
+      "effects": [],
+      "folder": "O1OQnKmoAdy4UCRP",
+      "sort": 400000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "b15HHtnn2kPsxRbU",
+      "name": "Ventaja",
+      "type": "cItem",
+      "img": "systems/sandbox/docs/icons/sh_citem_icon.png",
+      "data": {
+        "ciKey": "b15HHtnn2kPsxRbU",
+        "isUnique": true,
+        "uniqueGID": "",
+        "usetype": "ACT",
+        "selfdestruct": false,
+        "effectpath": "",
+        "ispermanent": false,
+        "maxuses": 1,
+        "icon": "BOOK",
+        "rechargable": false,
+        "roll": "",
+        "rollid": "",
+        "rollname": "",
+        "hasdialog": false,
+        "dialogName": "",
+        "dialogID": "",
+        "tokeniconpath": "",
+        "istokenicon": false,
+        "tokenvisible": false,
+        "mods": [
+          {
+            "name": "Ventaja",
+            "index": 0,
+            "type": "ADD",
+            "attribute": "suma",
+            "selectnum": "",
+            "listmod": "INCLUDE",
+            "items": [],
+            "value": "1"
+          }
+        ],
+        "groups": [
+          {
+            "id": "NBIGol5sUhFwuVvP",
+            "name": "Ventaja grupo",
+            "ikey": "ventaja_grupo"
+          }
+        ],
+        "attributes": {
+          "name": "Ventaja",
+          "nombre_prop": {
+            "value": "",
+            "ishidden": false
+          }
+        },
+        "description": null
+      },
+      "effects": [],
+      "folder": "O1OQnKmoAdy4UCRP",
+      "sort": 500000,
+      "permission": {
+        "default": 0,
+        "OV6G7LczZ2f9SeGt": 3
+      },
+      "flags": {}
+    }
+  ],
+  "folders": [
+    {
+      "_id": "dMvSOj6Ba47M3Pk9",
+      "name": "Plantilla (NO TOCAR)",
+      "type": "Item",
+      "parent": null,
+      "sorting": "a",
+      "sort": 0,
+      "color": null,
+      "flags": {}
+    },
+    {
+      "_id": "B0ZyJsC2G31vMYmB",
+      "name": "1 Pestañas",
+      "type": "Item",
+      "parent": "dMvSOj6Ba47M3Pk9",
+      "sorting": "a",
+      "sort": 0,
+      "color": null,
+      "flags": {}
+    },
+    {
+      "_id": "0j9YXVgEkaBhSeOg",
+      "name": "2 Paneles",
+      "type": "Item",
+      "parent": "dMvSOj6Ba47M3Pk9",
+      "sorting": "a",
+      "sort": 0,
+      "color": null,
+      "flags": {}
+    },
+    {
+      "_id": "RvnEK9QUpOROlv2l",
+      "name": "3 Propiedades",
+      "type": "Item",
+      "parent": "dMvSOj6Ba47M3Pk9",
+      "sorting": "a",
+      "sort": 0,
+      "color": null,
+      "flags": {}
+    },
+    {
+      "_id": "kOhOl67CJtg7cSrl",
+      "name": "4 Grupos y Tablas",
+      "type": "Item",
+      "parent": "dMvSOj6Ba47M3Pk9",
+      "sorting": "a",
+      "sort": 0,
+      "color": null,
+      "flags": {}
+    },
+    {
+      "_id": "O1OQnKmoAdy4UCRP",
+      "name": "5 cItems",
+      "type": "Item",
+      "parent": "dMvSOj6Ba47M3Pk9",
+      "sorting": "a",
+      "sort": 0,
+      "color": null,
+      "flags": {}
+    },
+    {
+      "_id": "p8LXrDiXCI41Di6R",
+      "name": "Plantilla Pjs (NO TOCAR)",
+      "type": "Actor",
+      "parent": null,
+      "sorting": "a",
+      "sort": 0,
+      "color": null,
+      "flags": {}
+    }
+  ]
+}
