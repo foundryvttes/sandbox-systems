@@ -31,3 +31,5 @@ Desde la opción EXPORT SANDBOX JSON podrás generar el documento con la configu
 - Trueque [Mitos] 1°ed (El refugio de Ryhope) (Autor: Luvero#5745). [Manifest](https://raw.githubusercontent.com/Luvero-1/trueque-mitos-sandbox/trueque-mitos-sandbox/world.json)
 - Un momento único 1°ed (The Hill press) (Autor: Luvero#5745). [Manifest](https://raw.githubusercontent.com/Luvero-1/momentounico-sandbox/main/world.json)
 - Sistema genérico para Shadowshots (Shadowlands) (Autor: Luvero#5745). [Manifest](https://raw.githubusercontent.com/Luvero-1/shadowshots-sandbox/main/world.json)
+- Sombras Urbanas (Autor: Tisza#8064).
+- Carbon 2185 (Autor: D.P.HarmAssist#9712).
