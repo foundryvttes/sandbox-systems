@@ -36,3 +36,4 @@ Desde la opción EXPORT SANDBOX JSON podrás generar el documento con la configu
 - Avatar (Autor: Seregras#6712).
 - Stars without Number (Autor: Seregras#6712).
 - OSR (Autor: Seregras#6712).
+- En la Oscuridad (Autor: Yolo Mozart#1757).
