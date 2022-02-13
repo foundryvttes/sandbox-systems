@@ -37,3 +37,4 @@ Desde la opción EXPORT SANDBOX JSON podrás generar el documento con la configu
 - Stars without Number (Autor: Seregras#6712).
 - OSR (Autor: Seregras#6712).
 - En la Oscuridad (Autor: Yolo Mozart#1757).
+- Omertà: El poder de la mafia (Autor: Yolo Mozart#1757).
